@@ -144,4 +144,11 @@ describe('postList', () => {
     const elem = postList({ posts });
     expect(elem.querySelectorAll('ul > li')).toHaveLength(3);
   });
+
+  it('Si no hay posts, muestra mensaje', () => {
+    const posts = [];
+    const elem = postList({ posts });
+    expect(elem.querySelectorAll('ul')).toHaveLength(0);
+    expect(elem.querySelector('p').textContent.trim()).toBe('No hay posts');
+  });
 });

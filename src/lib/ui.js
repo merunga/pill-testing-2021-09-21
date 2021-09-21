@@ -3,8 +3,16 @@
 /* eslint-disable no-alert */
 
 import {
- getAllPosts, createPost, updatePost, deletePost,
+ getAllPosts,
 } from './data.js';
+
+import {
+  onBtnCrearClick,
+  onBtnGuardarClick,
+  onBtnCancelarClick,
+  onBtnEditarClickCreator,
+  onBtnEliminarClick,
+} from './handlers.js';
 
 export const render = (...components) => {
   const root = document.getElementById('root');
@@ -73,51 +81,17 @@ export const postDetails = (props) => {
     `;
 
     if (newPost) {
-      formElem.querySelector('#btn-crear').addEventListener('click', (e) => {
-        e.preventDefault();
-        const textArea = formElem.querySelector('#post-text');
-        if (textArea.value.trim()) {
-          createPost(textArea.value).then(renderPage);
-          textArea.value = '';
-        }
-      });
+      formElem.querySelector('#btn-crear').addEventListener('click', onBtnCrearClick);
     }
 
     if (editPost) {
-      formElem.querySelector('#btn-guardar').addEventListener('click', (e) => {
-        e.preventDefault();
-        const textArea = formElem.querySelector('#post-text');
-        const idInput = formElem.querySelector('#post-id');
-        if (textArea.value.trim()) {
-          updatePost(idInput.value, textArea.value).then(renderPage);
-          textArea.value = '';
-        }
-      });
-      formElem.querySelector('#btn-cancelar').addEventListener('click', (e) => {
-        e.preventDefault();
-        const root = document.getElementById('root');
-        const oldForm = root.querySelector('#post-form');
-        const newForm = postDetails({ post: null, editing: true });
-        oldForm.parentNode.replaceChild(newForm, oldForm);
-      });
+      formElem.querySelector('#btn-guardar').addEventListener('click', onBtnGuardarClick);
+      formElem.querySelector('#btn-cancelar').addEventListener('click', onBtnCancelarClick);
     }
 
     if (showPost) {
-      formElem.querySelector('#btn-editar').addEventListener('click', (e) => {
-        e.preventDefault();
-        const root = document.getElementById('root');
-        const oldForm = root.querySelector('#post-form');
-        const newForm = postDetails({ post, editing: true });
-        oldForm.parentNode.replaceChild(newForm, oldForm);
-      });
-      formElem.querySelector('#btn-eliminar').addEventListener('click', (e) => {
-        e.preventDefault();
-        const result = window.confirm('¿Eliminar?');
-        if (result) {
-          const idInput = formElem.querySelector('#post-id');
-          deletePost(idInput.value).then(renderPage);
-        }
-      });
+      formElem.querySelector('#btn-editar').addEventListener('click', onBtnEditarClickCreator(post));
+      formElem.querySelector('#btn-eliminar').addEventListener('click', onBtnEliminarClick);
     }
   }
   return formElem;

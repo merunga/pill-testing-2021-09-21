@@ -6,6 +6,7 @@ import {
  getAllPosts,
 } from './data.js';
 
+// eslint-disable-next-line import/no-cycle
 import {
   onBtnCrearClick,
   onBtnGuardarClick,

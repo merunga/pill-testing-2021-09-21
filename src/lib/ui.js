@@ -6,7 +6,7 @@ import {
  getAllPosts, createPost, updatePost, deletePost,
 } from './data.js';
 
-const render = (...components) => {
+export const render = (...components) => {
   const root = document.getElementById('root');
   root.innerHTML = '<div class="max-w-lg mx-auto w-full"></div>';
   const container = root.firstChild;

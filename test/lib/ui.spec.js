@@ -34,6 +34,10 @@ describe('render', () => {
 });
 
 describe('postDetails', () => {
+  it('Si no hay post y no editing === true no muestra nada', () => {
+    const elem = postDetails({ post: null });
+    expect(elem.innerHTML).toBe('');
+  });
   it('Muestra informacion post', () => {
     const post = {
       id: 'id-1',

@@ -21,6 +21,7 @@ export const render = (...components) => {
   components.forEach((c) => {
     container.appendChild(c);
   });
+  return root;
 };
 
 export const postDetails = (props) => {
@@ -124,10 +125,8 @@ export const postList = (props) => {
   return divElem;
 };
 
-export const renderPage = () => {
-  getAllPosts().then((posts) => {
-    const domNewPost = postDetails({ item: null, editing: true });
-    const domPostList = postList({ posts });
-    render(domNewPost, domPostList);
-  });
-};
+export const renderPage = () => getAllPosts().then((posts) => {
+  const domNewPost = postDetails({ item: null, editing: true });
+  const domPostList = postList({ posts });
+  return render(domNewPost, domPostList);
+});

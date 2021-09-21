@@ -18,5 +18,5 @@ export const init = () => {
   const app = firebase.initializeApp(firebaseConfig);
   window.firebaseApp = app;
 
-  renderPage();
+  return renderPage();
 };

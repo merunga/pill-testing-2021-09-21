@@ -6,7 +6,6 @@ import { render, postDetails } from '../../src/lib/ui';
 import { createPost, updatePost, deletePost } from '../../src/lib/data';
 
 jest.mock('../../src/lib/data');
-// import { onBtnCrearClick } from '../../src/lib/handlers';
 
 beforeEach(() => {
   document.body.innerHTML = '<div id="root"></div>';

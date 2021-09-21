@@ -22,7 +22,7 @@ export const createPost = (text) => {
 
 export const updatePost = (uid, text) => {
   const firestore = window.firebaseApp.firestore();
-  return firestore.collection('posts').doc(uid).update({ text });
+  return firestore.collection('posts').doc(uid).update({ text, dateLastEdited: new Date() });
 };
 
 export const deletePost = (uid) => {

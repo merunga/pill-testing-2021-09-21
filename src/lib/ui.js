@@ -33,7 +33,15 @@ export const postDetails = (props) => {
         <h2 class="text-lg font-medium text-gray-900">
           ${newPost ? 'Nuevo post' : ''}
           ${editPost ? 'Editar post' : ''}
-          ${showPost ? `Post del ${post.dateCreated.toDate().toISOString().slice(0, 10)}` : ''}
+          ${showPost
+            ? `Post del ${post.dateCreated.toDate().toISOString().slice(0, 16).replace('T', ' a las ')}
+              ${post && post.dateLastEdited
+                ? `<br /><small class="text-sm">Última edición: ${post.dateLastEdited.toDate().toISOString().slice(0, 16).replace('T', ' a las ')}</small>`
+                : ''
+              }
+              `
+            : ''
+          }
         </h2>
 
         ${post && post.id
@@ -47,7 +55,7 @@ export const postDetails = (props) => {
             >${(post && post.text) || ''}</textarea>`
           )
           : (
-            `<p class="mt-6 w-full p-1">${post && post.text}</p>`
+            `<p class="mt-6 w-full p-1 text-xl">${post && post.text}</p>`
           )
         }
 

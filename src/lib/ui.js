@@ -152,8 +152,8 @@ export const postList = (props) => {
 
 export const renderPage = () => {
   getAllPosts().then((posts) => {
-    const domNewPost = postDetails({ item: null, editing: true });
-    const domPostList = postList({ posts });
-    render(domNewPost, domPostList);
+    const newPost = postDetails({ item: null, editing: true });
+    const list = postList({ posts });
+    render(newPost, list);
   });
 };

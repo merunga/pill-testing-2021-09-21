@@ -1,7 +1,7 @@
 // Este es el punto de entrada de tu aplicacion
 // Import the functions you need from the SDKs you need
 
-import { renderPage } from './ui.js';
+import { renderPage } from './ui/utils.js';
 
 export const init = () => {
   // Your web app's Firebase configuration

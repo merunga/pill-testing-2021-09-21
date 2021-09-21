@@ -37,7 +37,7 @@ export const postDetails = (props) => {
         ${newPost ? 'Nuevo post' : ''}
         ${editPost ? 'Editar post' : ''}
         ${showPost
-          ? `Post del ${post.dateCreated.toDate().toISOString().slice(0, 16).replace('T', ' a las ')}
+          ? `Post creado el ${post.dateCreated.toDate().toISOString().slice(0, 16).replace('T', ' a las ')}
             ${post && post.dateLastEdited
               ? `<br /><small class="text-sm">Última edición: ${post.dateLastEdited.toDate().toISOString().slice(0, 16).replace('T', ' a las ')}</small>`
               : ''

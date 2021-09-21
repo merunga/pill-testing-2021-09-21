@@ -75,7 +75,7 @@ export const postDetails = (props) => {
         e.preventDefault();
         const textArea = divElem.querySelector('#post-text');
         if (textArea.value.trim()) {
-          createPost(textArea.value).then(renderAll);
+          createPost(textArea.value).then(renderPage);
           textArea.value = '';
         }
       });
@@ -87,7 +87,7 @@ export const postDetails = (props) => {
         const textArea = divElem.querySelector('#post-text');
         const idInput = divElem.querySelector('#post-id');
         if (textArea.value.trim()) {
-          updatePost(idInput.value, textArea.value).then(renderAll);
+          updatePost(idInput.value, textArea.value).then(renderPage);
           textArea.value = '';
         }
       });
@@ -113,7 +113,7 @@ export const postDetails = (props) => {
         const result = window.confirm('¿Eliminar?');
         if (result) {
           const idInput = divElem.querySelector('#post-id');
-          deletePost(idInput.value).then(renderAll);
+          deletePost(idInput.value).then(renderPage);
         }
       });
     }
@@ -148,7 +148,7 @@ export const postList = (props) => {
   return divElem;
 };
 
-export const renderAll = () => {
+export const renderPage = () => {
   getAllPosts().then((posts) => {
     const domNewPost = postDetails({ item: null, editing: true });
     const domPostList = postList({ posts });

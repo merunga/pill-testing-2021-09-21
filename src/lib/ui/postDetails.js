@@ -1,21 +1,7 @@
-/* eslint-disable indent */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-alert */
+import { renderPage } from './utils.js';
+import { createPost, updatePost, deletePost } from '../data.js';
 
-import {
- getAllPosts, createPost, updatePost, deletePost,
-} from './data.js';
-
-const render = (...components) => {
-  const root = document.getElementById('root');
-  root.innerHTML = '<div class="max-w-lg mx-auto w-full"></div>';
-  const container = root.firstChild;
-  components.forEach((c) => {
-    container.appendChild(c);
-  });
-};
-
-export const postDetails = (props) => {
+const postDetails = (props) => {
   const { post, editing } = props;
 
   const newPost = !post && editing;
@@ -37,30 +23,30 @@ export const postDetails = (props) => {
         ${newPost ? 'Nuevo post' : ''}
         ${editPost ? 'Editar post' : ''}
         ${showPost
-          ? `Post del ${post.dateCreated.toDate().toISOString().slice(0, 16).replace('T', ' a las ')}
+    ? `Post creado el ${post.dateCreated.toDate().toISOString().slice(0, 16).replace('T', ' a las ')}
             ${post && post.dateLastEdited
-              ? `<br /><small class="text-sm">Última edición: ${post.dateLastEdited.toDate().toISOString().slice(0, 16).replace('T', ' a las ')}</small>`
-              : ''
-            }
+    ? `<br /><small class="text-sm">Última edición: ${post.dateLastEdited.toDate().toISOString().slice(0, 16).replace('T', ' a las ')}</small>`
+    : ''
+}
             `
-          : ''
-        }
+    : ''
+}
       </h2>
 
       ${post && post.id
-        ? `<input id="post-id" type="hidden" value="${post.id}"></input>`
-        : ''
-      }
+    ? `<input id="post-id" type="hidden" value="${post.id}"></input>`
+    : ''
+}
       ${editing
-        ? (`
+    ? (`
           <textarea id="post-text" name="post-text"
             class="mt-6 block w-full border-gray-300 rounded-xs p-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >${(post && post.text) || ''}</textarea>`
-        )
-        : (
-          `<p class="mt-6 w-full p-1 text-xl">${post && post.text}</p>`
-        )
-      }
+    )
+    : (
+      `<p class="mt-6 w-full p-1 text-xl">${post && post.text}</p>`
+    )
+}
 
 
       <div class="flex">
@@ -123,37 +109,4 @@ export const postDetails = (props) => {
   return formElem;
 };
 
-export const postList = (props) => {
-  const { posts } = props;
-
-  const divElem = document.createElement('div');
-  divElem.innerHTML = `
-    <h1 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">Posts</h1>
-    ${posts && posts.length
-      ? (
-        `<ul role="list" class="border-t border-b border-gray-200 divide-y divide-gray-200">
-        </ul>`
-      )
-      : (
-        '<p class="text-lg font-bold tracking-tight text-gray-900 sm:text-xl">No hay posts</p>'
-      )
-    }
-  `;
-
-  const ul = divElem.querySelector('ul');
-  posts.forEach((p) => {
-    const li = document.createElement('li');
-    li.outerHTML = '<li class="flex py-1"></li>';
-    li.appendChild(postDetails({ post: p }));
-    ul.appendChild(li);
-  });
-  return divElem;
-};
-
-export const renderPage = () => {
-  getAllPosts().then((posts) => {
-    const newPost = postDetails({ item: null, editing: true });
-    const list = postList({ posts });
-    render(newPost, list);
-  });
-};
+export default postDetails;
